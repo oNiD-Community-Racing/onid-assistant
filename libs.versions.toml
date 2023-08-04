@@ -1,0 +1,23 @@
+[versions]
+kotlin = "1.9.0"
+shadow = "8.1.1"
+detekt = "1.23.1"
+git-hooks = "0.0.2"
+
+kord-extensions = "1.5.8-20230803.085456-7"
+logging = "5.0.2"
+logback = "1.4.9"
+
+[libraries]
+kord-extensions-core = { module = "com.kotlindiscord.kord.extensions:kord-extensions", version.ref = "kord-extensions" }
+kord-extensions-unsafe = { module = "com.kotlindiscord.kord.extensions:unsafe", version.ref = "kord-extensions" }
+kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib" }
+logging = { module = "io.github.oshai:kotlin-logging", version.ref = "logging" }
+logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback"}
+detekt = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt"}
+
+[plugins]
+kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+git-hooks = { id = "com.github.jakemarsden.git-hooks", version.ref = "git-hooks" }
