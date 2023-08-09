@@ -17,6 +17,7 @@ import dev.kord.common.entity.OverwriteType
 import dev.kord.common.entity.Permission
 import dev.kord.common.entity.Permissions
 import dev.kord.core.behavior.GuildBehavior
+import dev.kord.core.behavior.channel.createStageChannel
 import dev.kord.core.behavior.channel.createTextChannel
 import dev.kord.core.behavior.channel.createVoiceChannel
 import dev.kord.core.behavior.createCategory
@@ -182,19 +183,18 @@ class ChannelCreator : Extension() {
 		attendance: Boolean,
 		splitVCDB: Boolean
 	) {
-		category.createTextChannel("$name-chat") { parentId = category.id }
-		category.createTextChannel("$name-outcomes") { parentId = category.id }
+		category.createTextChannel("$name-chat")
+		category.createTextChannel("$name-outcomes")
 		if (game == EventGame.ACC) {
-			category.createTextChannel("$name-liveries") { parentId = category.id }
-			category.createTextChannel("$name-practice-server") { parentId = category.id }
+			category.createTextChannel("$name-liveries")
+			category.createTextChannel("$name-practice-server")
 		}
-		if (attendance) category.createTextChannel("$name-attendance") { parentId = category.id }
+		if (attendance) category.createTextChannel("$name-attendance")
 		if (splitVCDB) {
-			// TODO This should be a stage channel
-			category.createVoiceChannel("$name Drive Briefing") { parentId = category.id }
-			category.createVoiceChannel("$name VC") { parentId = category.id }
+			category.createStageChannel("$name Drive Briefing")
+			category.createVoiceChannel("$name VC")
 		} else {
-			category.createVoiceChannel("$name VC and DB") { parentId = category.id }
+			category.createVoiceChannel("$name VC and DB")
 		}
 	}
 }
