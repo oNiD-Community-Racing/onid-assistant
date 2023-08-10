@@ -175,6 +175,7 @@ formatting:
     active: true
     autoCorrect: true
   NoWildcardImports:
+    active: false
     packagesToUseImportOnDemandProperty: ""
   PackageName:
     active: true
@@ -363,3 +364,5 @@ style:
     active: true
   UseRequireNotNull:
     active: true
+  WildcardImport:
+    active: false
