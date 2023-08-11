@@ -18,6 +18,7 @@ detekt = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref
 
 [plugins]
 kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 git-hooks = { id = "com.github.jakemarsden.git-hooks", version.ref = "git-hooks" }

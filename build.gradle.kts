@@ -6,6 +6,7 @@ plugins {
     application
 
     alias(libs.plugins.kotlin)
+	alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.shadow)
     alias(libs.plugins.detekt)
     alias(libs.plugins.git.hooks)
@@ -42,6 +43,8 @@ dependencies {
     // Logging Deps
     implementation(libs.logging)
     implementation(libs.logback)
+
+	implementation("com.google.apis:google-api-services-youtube:v3-rev20230807-2.0.0")
 }
 
 application {
