@@ -56,11 +56,8 @@ class YouTubeLiveNotification : Extension() {
 
 			channel.createMessage {
 				content =
-					"**${stream?.snippet?.title}**\n\nHey <@&$GUILD>, ${stream?.snippet?.channelTitle} just went live at ${
-						YOUTUBE_WATCH_LINK.replace(
-							"<ID>",
-							currentStreamId!!
-						)
+					"**${stream?.snippet?.title}**\n\nHey @everyone, ${stream?.snippet?.channelTitle} just went live at ${
+						YOUTUBE_WATCH_LINK.replace("<ID>", currentStreamId!!)
 					}"
 			}
 		}
