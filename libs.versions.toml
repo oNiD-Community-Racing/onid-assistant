@@ -4,8 +4,8 @@ shadow = "8.1.1"
 detekt = "1.23.1"
 git-hooks = "0.0.2"
 
-kord-extensions = "1.5.9-20230809.104126-1"
-logging = "5.0.2"
+kord-extensions = "1.5.9-20230822.180436-15"
+logging = "5.1.0"
 logback = "1.4.9"
 
 [libraries]

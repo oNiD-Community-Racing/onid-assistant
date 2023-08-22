@@ -13,8 +13,16 @@ import com.kotlindiscord.kord.extensions.modules.unsafe.extensions.unsafeSlashCo
 import com.kotlindiscord.kord.extensions.modules.unsafe.types.InitialSlashCommandResponse
 import com.kotlindiscord.kord.extensions.modules.unsafe.types.ackEphemeral
 import com.kotlindiscord.kord.extensions.modules.unsafe.types.respondEphemeral
-import dev.kord.common.entity.*
-import dev.kord.core.behavior.channel.*
+import dev.kord.common.entity.Overwrite
+import dev.kord.common.entity.OverwriteType
+import dev.kord.common.entity.Permission
+import dev.kord.common.entity.Permissions
+import dev.kord.common.entity.Snowflake
+import dev.kord.core.behavior.channel.createNewsChannel
+import dev.kord.core.behavior.channel.createStageChannel
+import dev.kord.core.behavior.channel.createTextChannel
+import dev.kord.core.behavior.channel.createVoiceChannel
+import dev.kord.core.behavior.channel.editRolePermission
 import dev.kord.core.behavior.createCategory
 import dev.kord.core.behavior.interaction.modal
 import dev.kord.core.entity.Role
@@ -39,7 +47,7 @@ class ChannelCreator : Extension() {
             }
 
             action {
-                if (arguments.game == EventGame.AMS2 || arguments.game == EventGame.RACEROOM) {
+                if (arguments.game == EventGame.RACEROOM) {
                     ackEphemeral()
                     respondEphemeral {
                         content = "This game type is not supported yet. Contact `nocomment1105` for more information!"
@@ -73,30 +81,45 @@ class ChannelCreator : Extension() {
                                 OverwriteType.Role,
                                 Permissions(Permission.ViewChannel),
                                 Permissions()
-                            )
+                            ),
+							Overwrite(
+								arguments.adminRole.id,
+								OverwriteType.Role,
+								Permissions(Permission.ViewChannel),
+								Permissions()
+							)
                         )
                     )
                 }
 
-                if (arguments.game == EventGame.AC) {
-                    channels(
-                        EventGame.AC,
-                        modalObj.customChannelName.value ?: modalObj.eventName.value!!,
-                        category,
-                        arguments.eventRole,
-                        arguments.attendance,
-                        arguments.splitVCDB
-                    )
-                } else if (arguments.game == EventGame.ACC) {
-                    channels(
-                        EventGame.ACC,
-                        modalObj.customChannelName.value ?: modalObj.eventName.value!!,
-                        category,
-                        arguments.eventRole,
-                        arguments.attendance,
-                        arguments.splitVCDB
-                    )
-                }
+				when (arguments.game) {
+					EventGame.AC -> channels(
+							EventGame.AC,
+							modalObj.customChannelName.value ?: modalObj.eventName.value!!,
+							category,
+							arguments.eventRole,
+							arguments.attendance,
+							arguments.splitVCDB
+						)
+					EventGame.ACC -> channels(
+							EventGame.ACC,
+							modalObj.customChannelName.value ?: modalObj.eventName.value!!,
+							category,
+							arguments.eventRole,
+							arguments.attendance,
+							arguments.splitVCDB
+						)
+					EventGame.AMS2 -> channels(
+							EventGame.AMS2,
+							modalObj.customChannelName.value ?: modalObj.eventName.value!!,
+							category,
+							arguments.eventRole,
+							attendance = false,
+							splitVCDB = false
+						)
+
+					EventGame.RACEROOM -> { /* Can't get here */ }
+				}
 
                 respondEphemeral { content = "Created channels!" }
             }
@@ -122,6 +145,12 @@ class ChannelCreator : Extension() {
             name = "event-role"
             description = "The role users must have to see the channels"
         }
+
+		/** The role for the admins that need to see the channels. */
+		val adminRole by role {
+			name = "admin-role"
+			description = "The role for the admins that need to see the channels"
+		}
 
         /** Whether to create an attendance logging channel or not. */
         val attendance by boolean {
@@ -175,7 +204,9 @@ class ChannelCreator : Extension() {
     ) {
         category.createNewsChannel("$name-announcements").denySendMessages(eventRole.id)
         category.createTextChannel("$name-chat")
-        category.createTextChannel("$name-outcomes").denySendMessages(eventRole.id)
+		if (game != EventGame.AMS2) {
+			category.createTextChannel("$name-outcomes").denySendMessages(eventRole.id)
+		}
         if (game == EventGame.ACC) {
             category.createTextChannel("$name-liveries").denySendMessages(eventRole.id)
             category.createTextChannel("$name-practice-server").denySendMessages(eventRole.id)
