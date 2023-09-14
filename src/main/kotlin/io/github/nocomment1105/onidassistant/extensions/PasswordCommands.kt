@@ -19,7 +19,8 @@ class PasswordCommands : Extension() {
 
 				action {
 					respond {
-						content = "https://discord.com/channels/800485491580862484/802294502110658620/1025503680230858843"
+						content =
+							"https://discord.com/channels/800485491580862484/802294502110658620/1025503680230858843"
 					}
 				}
 			}

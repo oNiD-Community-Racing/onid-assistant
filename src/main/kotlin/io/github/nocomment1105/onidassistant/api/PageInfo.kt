@@ -4,6 +4,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class PageInfo(
-    val resultsPerPage: Int?,
-    val totalResults: Int?
+	val resultsPerPage: Int?,
+	val totalResults: Int?
 )
