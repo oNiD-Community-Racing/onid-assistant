@@ -13,7 +13,7 @@ plugins {
 }
 
 group = "io.github.nocomment1105.onidassistant"
-version = "0.1.0"
+version = "0.1.1"
 
 val javaVersion = 17
 
@@ -43,8 +43,6 @@ dependencies {
     // Logging Deps
     implementation(libs.logging)
     implementation(libs.logback)
-
-	implementation("com.google.apis:google-api-services-youtube:v3-rev20230807-2.0.0")
 }
 
 application {

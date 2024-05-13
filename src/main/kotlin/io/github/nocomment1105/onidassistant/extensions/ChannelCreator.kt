@@ -4,6 +4,7 @@ import com.kotlindiscord.kord.extensions.checks.anyGuild
 import com.kotlindiscord.kord.extensions.checks.hasPermission
 import com.kotlindiscord.kord.extensions.commands.Arguments
 import com.kotlindiscord.kord.extensions.commands.converters.impl.boolean
+import com.kotlindiscord.kord.extensions.commands.converters.impl.optionalRole
 import com.kotlindiscord.kord.extensions.commands.converters.impl.role
 import com.kotlindiscord.kord.extensions.components.forms.ModalForm
 import com.kotlindiscord.kord.extensions.extensions.Extension
@@ -17,6 +18,7 @@ import dev.kord.common.entity.Permission
 import dev.kord.common.entity.Permissions
 import dev.kord.common.entity.Snowflake
 import dev.kord.core.behavior.channel.createNewsChannel
+import dev.kord.core.behavior.channel.createStageChannel
 import dev.kord.core.behavior.channel.createTextChannel
 import dev.kord.core.behavior.channel.createVoiceChannel
 import dev.kord.core.behavior.channel.editRolePermission
@@ -78,6 +80,17 @@ class ChannelCreator : Extension() {
 							)
 						)
 					)
+					// Add the extra role if it exists, if not just go about business as usual.
+					if (arguments.extraRole != null) {
+						permissionOverwrites.add(
+							Overwrite(
+								arguments.extraRole!!.id,
+								OverwriteType.Role,
+								Permissions(Permission.ViewChannel),
+								Permissions()
+							)
+						)
+					}
 				}
 				channels(
 					if (modalObj.customChannelName.value.isNullOrEmpty()) {
@@ -87,7 +100,8 @@ class ChannelCreator : Extension() {
 					},
 					category,
 					arguments.eventRole,
-					arguments.attendance
+					arguments.attendance,
+					arguments.briefing
 				)
 
 				respondEphemeral { content = "Created channels!" }
@@ -112,6 +126,18 @@ class ChannelCreator : Extension() {
 		val attendance by boolean {
 			name = "attendance-channel"
 			description = "Whether to create an attendance logging channel or not"
+		}
+
+		/** Whether to create a briefing stage channel or not. */
+		val briefing by boolean {
+			name = "briefing-channel"
+			description = "Whether to create a briefing channel or not"
+		}
+
+		/** An optional extra role that may need access to the channels in the category. */
+		val extraRole by optionalRole {
+			name = "extra-role"
+			description = "An optional extra role that may need to see these channels."
 		}
 	}
 
@@ -140,17 +166,20 @@ class ChannelCreator : Extension() {
 	 * @param category The [Category] to create the channels in
 	 * @param eventRole The [Role] users will require to see these channels.
 	 *  Used to deny [Send Messages][Permission.SendMessages] in certain channels.
-	 * @param attendance Whether to create a channel for logging attendance or not
+	 * @param attendance Whether to create a channel for logging attendance or not.
+	 * @param briefing Whether to create a Stage Channel for Driver briefings or not.
 	 */
 	private suspend fun channels(
 		name: String,
 		category: Category,
 		eventRole: Role,
-		attendance: Boolean
+		attendance: Boolean,
+		briefing: Boolean
 	) {
 		category.createNewsChannel("$name-announcements").denySendMessages(eventRole.id)
 		category.createTextChannel("$name-chat")
 		if (attendance) category.createTextChannel("$name-attendance").denySendMessages(eventRole.id)
+		if (briefing) category.createStageChannel("$name-briefing")
 		category.createVoiceChannel("$name VC")
 	}
 
