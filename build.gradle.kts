@@ -15,7 +15,7 @@ plugins {
 group = "io.github.nocomment1105.onidassistant"
 version = "0.1.1"
 
-val javaVersion = 17
+val javaVersion = 21
 
 repositories {
     mavenCentral()
@@ -43,6 +43,9 @@ dependencies {
     // Logging Deps
     implementation(libs.logging)
     implementation(libs.logback)
+
+	// Database
+	implementation(libs.kmongo)
 }
 
 application {
