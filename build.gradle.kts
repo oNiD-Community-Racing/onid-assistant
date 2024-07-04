@@ -13,7 +13,7 @@ plugins {
 }
 
 group = "io.github.nocomment1105.onidassistant"
-version = "0.1.1"
+version = "0.2.0"
 
 val javaVersion = 21
 
