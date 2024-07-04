@@ -314,8 +314,6 @@ style:
     active: true
   OptionalUnit:
     active: false
-  OptionalWhenBraces:
-    active: true
   PreferToOverPairSyntax:
     active: true
   RedundantExplicitType:

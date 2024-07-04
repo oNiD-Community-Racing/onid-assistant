@@ -2,6 +2,7 @@ package io.github.nocomment1105.onidassistant.extensions
 
 import com.kotlindiscord.kord.extensions.extensions.Extension
 import com.kotlindiscord.kord.extensions.extensions.publicSlashCommand
+import io.github.nocomment1105.onidassistant.api.SimGrid
 
 class PasswordCommands : Extension() {
 	override val name: String = "password-commands"
@@ -15,6 +16,8 @@ class PasswordCommands : Extension() {
 				respond {
 					content = "It's on SimGrid!"
 				}
+
+				println(SimGrid().getChampionships())
 			}
 		}
 	}
