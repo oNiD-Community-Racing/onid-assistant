@@ -1,5 +1,8 @@
 package io.github.nocomment1105.onidassistant.utils
 
 import com.kotlindiscord.kord.extensions.utils.env
+import com.kotlindiscord.kord.extensions.utils.envOrNull
 
 val TOKEN = env("TOKEN")
+
+val MONGO_URI = envOrNull("MONGO_URI") ?: "mongodb://localhost:27017"
