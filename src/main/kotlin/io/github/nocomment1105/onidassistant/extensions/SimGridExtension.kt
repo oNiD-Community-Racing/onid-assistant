@@ -174,11 +174,11 @@ class SimGridExtension : Extension() {
 						}
 						field {
 							name = "Total wins (Win %)"
-							value = "${user.totalWins} (${(user.totalWins / user.totalRacesStarted) * 100}%)"
+							value = "${user.totalWins} (${(user.totalWins.toDouble() / user.totalRacesStarted.toDouble()) * 100}%)"
 						}
 						field {
 							name = "Total podiums (Podium %)"
-							value = "${user.totalPodiums} (${(user.totalPodiums / user.totalRacesStarted) * 100}%)"
+							value = "${user.totalPodiums} (${(user.totalPodiums.toDouble() / user.totalRacesStarted.toDouble()) * 100}%)"
 						}
 					}
 					embed {
