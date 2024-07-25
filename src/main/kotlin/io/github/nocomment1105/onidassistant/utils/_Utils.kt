@@ -5,6 +5,9 @@ import com.kotlindiscord.kord.extensions.utils.loadModule
 import io.github.nocomment1105.onidassistant.database.Database
 import io.github.nocomment1105.onidassistant.database.collections.ChannelCreatorConfigCollection
 import io.github.nocomment1105.onidassistant.database.collections.MetaCollection
+import io.github.oshai.kotlinlogging.KLogger
+import io.ktor.client.plugins.ClientRequestException
+import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.runBlocking
 import org.koin.dsl.bind
 
@@ -27,6 +30,22 @@ suspend inline fun ExtensibleBotBuilder.database(migrate: Boolean) {
 					db.migrate()
 				}
 			}
+		}
+	}
+}
+
+/**
+ * A utility function to handle responding to errors. Currently only supports Client request exceptions
+ *
+ * @param logger The [KLogger] to send the logging information too
+ * @param e The exception that was thrown
+ */
+fun errorResponse(logger: KLogger, e: Exception) {
+	if (e is ClientRequestException && e.response.status.value in 400 until 600) {
+		if (e.response.status.value == HttpStatusCode.NotFound.value) {
+			logger.debug { "Code ${e.response.status}" }
+		} else {
+			logger.error(e) { "Code ${e.response.status}" }
 		}
 	}
 }

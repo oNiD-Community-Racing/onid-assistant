@@ -46,6 +46,9 @@ dependencies {
 
 	// Database
 	implementation(libs.kmongo)
+
+	//implementation(libs.ktor.cio)
+	implementation(libs.ktor.auth)
 }
 
 application {

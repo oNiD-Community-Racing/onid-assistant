@@ -1,12 +1,11 @@
 package io.github.nocomment1105.onidassistant.api
 
-import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Races(
+data class Game(
 	val id: Int,
-	val raceName: String,
-	val track: String,
-	val startsAt: Instant
+	val name: String,
+	val gameType: String,
+	val abbreviation: String,
 )

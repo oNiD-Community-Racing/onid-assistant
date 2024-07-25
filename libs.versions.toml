@@ -1,13 +1,16 @@
 [versions]
-kotlin = "2.0.20-Beta1"
+kotlin = "2.0.10-RC"
 shadow = "8.1.1"
 detekt = "1.23.6"
 git-hooks = "0.0.2"
 
-kord-extensions = "1.9.0-20240701.141421-2"
+kord-extensions = "1.9.0-20240714.071343-11"
 logging = "7.0.0"
 logback = "1.5.6"
 kmongo = "5.1.0"
+
+# Keep this the same as KordEx
+ktor = "2.3.12"
 
 [libraries]
 kord-extensions-core = { module = "com.kotlindiscord.kord.extensions:kord-extensions", version.ref = "kord-extensions" }
@@ -17,6 +20,7 @@ logging = { module = "io.github.oshai:kotlin-logging", version.ref = "logging" }
 logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback"}
 kmongo = { module = "org.litote.kmongo:kmongo-coroutine-serialization", version.ref = "kmongo" }
 detekt = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt"}
+ktor-auth = { module = "io.ktor:ktor-client-auth", version.ref = "ktor"}
 
 [plugins]
 kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }

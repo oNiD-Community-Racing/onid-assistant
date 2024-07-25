@@ -34,7 +34,6 @@ import dev.kord.core.entity.Role
 import dev.kord.core.entity.channel.CategorizableChannel
 import dev.kord.core.entity.channel.Category
 import io.github.nocomment1105.onidassistant.database.collections.ChannelCreatorConfigCollection
-import io.github.nocomment1105.onidassistant.extensions.ChannelCreator.ConfigArgs
 import io.github.nocomment1105.onidassistant.utils.CategoryType
 
 class ChannelCreator : Extension() {
