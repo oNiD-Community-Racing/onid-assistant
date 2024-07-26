@@ -15,6 +15,6 @@ data class SGUser(
 	val totalWins: Int,
 	val totalPodiums: Int,
 	val simgridProActive: Boolean? = null,
-	val boostedHosts: List<String>,
+	val boostedHosts: List<BoostedHosts>,
 	val gridRatings: List<GridRating>,
 )
