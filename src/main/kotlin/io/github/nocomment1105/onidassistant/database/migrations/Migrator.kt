@@ -44,6 +44,7 @@ object Migrator : KordExKoinComponent {
 			try {
 				when (nextVersion) {
 					1 -> ::v1
+					2 -> ::v2
 					else -> break
 				}(db.onidDb)
 

@@ -10,6 +10,7 @@ import kotlinx.serialization.Serializable
  * @property acCategoryId The Assetto Corsa category ID
  * @property accCategoryId The Assetto Corsa Competizione category ID
  * @property ams2CategoryId The Automobilista 2 Category ID
+ * @property lmuCategoryId The Le Mans Ultimate Category ID
  * @property enduroCategoryId The Enduro event category ID
  * @property consoleCategoryId The Console category ID
  * @property otherSimCategoryId The ID of the category for other sims
@@ -20,6 +21,7 @@ data class ChannelCreatorConfigData(
 	val acCategoryId: Snowflake,
 	val accCategoryId: Snowflake,
 	val ams2CategoryId: Snowflake,
+	val lmuCategoryId: Snowflake,
 	val enduroCategoryId: Snowflake,
 	val consoleCategoryId: Snowflake,
 	val otherSimCategoryId: Snowflake,

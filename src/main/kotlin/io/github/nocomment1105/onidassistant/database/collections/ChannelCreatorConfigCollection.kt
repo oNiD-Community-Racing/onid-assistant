@@ -20,6 +20,7 @@ class ChannelCreatorConfigCollection : KordExKoinComponent {
 			CategoryType.AC -> coll?.acCategoryId
 			CategoryType.ACC -> coll?.accCategoryId
 			CategoryType.AMS2 -> coll?.ams2CategoryId
+			CategoryType.LMU -> coll?.lmuCategoryId
 			CategoryType.ENDURO -> coll?.enduroCategoryId
 			CategoryType.CONSOLE -> coll?.consoleCategoryId
 			CategoryType.OTHER -> coll?.otherSimCategoryId
@@ -31,6 +32,7 @@ class ChannelCreatorConfigCollection : KordExKoinComponent {
 		acCategoryId: Snowflake,
 		accCategoryId: Snowflake,
 		ams2CategoryId: Snowflake,
+		lmuCategoryId: Snowflake,
 		enduroCategoryId: Snowflake,
 		consoleCategoryId: Snowflake,
 		otherCategoryId: Snowflake,
@@ -42,6 +44,7 @@ class ChannelCreatorConfigCollection : KordExKoinComponent {
 				acCategoryId,
 				accCategoryId,
 				ams2CategoryId,
+				lmuCategoryId,
 				enduroCategoryId,
 				consoleCategoryId,
 				otherCategoryId

@@ -135,6 +135,7 @@ class ChannelCreator : Extension() {
 					arguments.acCategory.id,
 					arguments.accCategory.id,
 					arguments.ams2Category.id,
+					arguments.lmuCategory.id,
 					arguments.enduroCategory.id,
 					arguments.consoleCategory.id,
 					arguments.otherCategory.id
@@ -198,6 +199,11 @@ class ChannelCreator : Extension() {
 		val ams2Category by channel {
 			name = "ams2-category".toKey()
 			description = "The Automobilista 2 Category".toKey()
+			requireChannelType(ChannelType.GuildCategory)
+		}
+		val lmuCategory by channel {
+			name = "lmu-category".toKey()
+			description = "The Le Mans Ultimate Category".toKey()
 			requireChannelType(ChannelType.GuildCategory)
 		}
 		val enduroCategory by channel {

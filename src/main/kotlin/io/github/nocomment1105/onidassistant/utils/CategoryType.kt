@@ -8,6 +8,7 @@ enum class CategoryType(override val readableName: Key) : ChoiceEnum {
 	AC("Assetto Corsa".toKey()),
 	ACC("Assetto Corsa Competizione".toKey()),
 	AMS2("Automobilista 2".toKey()),
+	LMU("Le Mans Ultimate".toKey()),
 	ENDURO("Enduro".toKey()),
 	CONSOLE("Console".toKey()),
 	OTHER("Other".toKey())
