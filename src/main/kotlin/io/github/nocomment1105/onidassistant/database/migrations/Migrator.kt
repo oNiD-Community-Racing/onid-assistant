@@ -11,7 +11,7 @@
 
 package io.github.nocomment1105.onidassistant.database.migrations
 
-import com.kotlindiscord.kord.extensions.koin.KordExKoinComponent
+import dev.kordex.core.koin.KordExKoinComponent
 import io.github.nocomment1105.onidassistant.database.Database
 import io.github.nocomment1105.onidassistant.database.collections.MetaCollection
 import io.github.nocomment1105.onidassistant.database.entities.MetaData

@@ -1,7 +1,7 @@
 package io.github.nocomment1105.onidassistant.database.collections
 
-import com.kotlindiscord.kord.extensions.koin.KordExKoinComponent
 import dev.kord.common.entity.Snowflake
+import dev.kordex.core.koin.KordExKoinComponent
 import io.github.nocomment1105.onidassistant.database.Database
 import io.github.nocomment1105.onidassistant.database.entities.ChannelCreatorConfigData
 import io.github.nocomment1105.onidassistant.utils.CategoryType

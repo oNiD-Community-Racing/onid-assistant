@@ -1,21 +1,5 @@
 package io.github.nocomment1105.onidassistant.extensions
 
-import com.kotlindiscord.kord.extensions.checks.anyGuild
-import com.kotlindiscord.kord.extensions.checks.hasPermission
-import com.kotlindiscord.kord.extensions.commands.Arguments
-import com.kotlindiscord.kord.extensions.commands.application.slash.converters.impl.enumChoice
-import com.kotlindiscord.kord.extensions.commands.converters.impl.boolean
-import com.kotlindiscord.kord.extensions.commands.converters.impl.channel
-import com.kotlindiscord.kord.extensions.commands.converters.impl.optionalRole
-import com.kotlindiscord.kord.extensions.commands.converters.impl.role
-import com.kotlindiscord.kord.extensions.components.forms.ModalForm
-import com.kotlindiscord.kord.extensions.extensions.Extension
-import com.kotlindiscord.kord.extensions.extensions.ephemeralSlashCommand
-import com.kotlindiscord.kord.extensions.modules.unsafe.annotations.UnsafeAPI
-import com.kotlindiscord.kord.extensions.modules.unsafe.extensions.unsafeSlashCommand
-import com.kotlindiscord.kord.extensions.modules.unsafe.types.InitialSlashCommandResponse
-import com.kotlindiscord.kord.extensions.modules.unsafe.types.ackEphemeral
-import com.kotlindiscord.kord.extensions.modules.unsafe.types.respondEphemeral
 import dev.kord.common.entity.ChannelType
 import dev.kord.common.entity.Overwrite
 import dev.kord.common.entity.OverwriteType
@@ -33,6 +17,22 @@ import dev.kord.core.behavior.interaction.modal
 import dev.kord.core.entity.Role
 import dev.kord.core.entity.channel.CategorizableChannel
 import dev.kord.core.entity.channel.Category
+import dev.kordex.core.checks.anyGuild
+import dev.kordex.core.checks.hasPermission
+import dev.kordex.core.commands.Arguments
+import dev.kordex.core.commands.application.slash.converters.impl.enumChoice
+import dev.kordex.core.commands.converters.impl.boolean
+import dev.kordex.core.commands.converters.impl.channel
+import dev.kordex.core.commands.converters.impl.optionalRole
+import dev.kordex.core.commands.converters.impl.role
+import dev.kordex.core.components.forms.ModalForm
+import dev.kordex.core.extensions.Extension
+import dev.kordex.core.extensions.ephemeralSlashCommand
+import dev.kordex.core.i18n.toKey
+import dev.kordex.core.i18n.types.Key
+import dev.kordex.modules.dev.unsafe.annotations.UnsafeAPI
+import dev.kordex.modules.dev.unsafe.commands.slash.InitialSlashCommandResponse
+import dev.kordex.modules.dev.unsafe.extensions.unsafeSlashCommand
 import io.github.nocomment1105.onidassistant.database.collections.ChannelCreatorConfigCollection
 import io.github.nocomment1105.onidassistant.utils.CategoryType
 
@@ -42,8 +42,8 @@ class ChannelCreator : Extension() {
 	@OptIn(UnsafeAPI::class)
 	override suspend fun setup() {
 		unsafeSlashCommand(::ChannelsArgs) {
-			name = "onid-channels"
-			description = "Create the channels required for an oNiD event/series"
+			name = "onid-channels".toKey()
+			description = "Create the channels required for an oNiD event/series".toKey()
 
 			initialResponse = InitialSlashCommandResponse.None
 
@@ -67,8 +67,8 @@ class ChannelCreator : Extension() {
 
 				this@unsafeSlashCommand.componentRegistry.register(modalObj)
 
-				event.interaction.modal(modalObj.title, modalObj.id) {
-					modalObj.applyToBuilder(this, getLocale(), null)
+				event.interaction.modal(modalObj.title.toString(), modalObj.id) {
+					modalObj.applyToBuilder(this, getLocale())
 				}
 
 				modalObj.awaitCompletion { modalSubmitInteraction ->
@@ -121,8 +121,8 @@ class ChannelCreator : Extension() {
 		}
 
 		ephemeralSlashCommand(::ConfigArgs) {
-			name = "category-config"
-			description = "Configure the categories for channels to get added too"
+			name = "category-config".toKey()
+			description = "Configure the categories for channels to get added too".toKey()
 
 			check {
 				anyGuild()
@@ -148,82 +148,82 @@ class ChannelCreator : Extension() {
 
 	inner class ChannelsArgs : Arguments() {
 		val category by enumChoice<CategoryType> {
-			name = "category"
-			description = "The category to put the channels under"
-			typeName = "Category For Channels"
+			name = "category".toKey()
+			description = "The category to put the channels under".toKey()
+			typeName = "Category For Channels".toKey()
 		}
 
 		/** The role required to see the channels for the event. */
 		val eventRole by role {
-			name = "event-role"
-			description = "The role users must have to see the channels"
+			name = "event-role".toKey()
+			description = "The role users must have to see the channels".toKey()
 		}
 
 		/** The role for the admins that need to see the channels. */
 		val adminRole by role {
-			name = "admin-role"
-			description = "The role for the admins that need to see the channels"
+			name = "admin-role".toKey()
+			description = "The role for the admins that need to see the channels".toKey()
 		}
 
 		/** Whether to create an attendance logging channel or not. */
 		val attendance by boolean {
-			name = "attendance-channel"
-			description = "Whether to create an attendance logging channel or not"
+			name = "attendance-channel".toKey()
+			description = "Whether to create an attendance logging channel or not".toKey()
 		}
 
 		/** Whether to create a briefing stage channel or not. */
 		val briefing by boolean {
-			name = "briefing-channel"
-			description = "Whether to create a briefing channel or not"
+			name = "briefing-channel".toKey()
+			description = "Whether to create a briefing channel or not".toKey()
 		}
 
 		/** An optional extra role that may need access to the channels in the category. */
 		val extraRole by optionalRole {
-			name = "extra-role"
-			description = "An optional extra role that may need to see these channels."
+			name = "extra-role".toKey()
+			description = "An optional extra role that may need to see these channels.".toKey()
 		}
 	}
 
 	inner class ConfigArgs : Arguments() {
 		val acCategory by channel {
-			name = "ac-category"
-			description = "The Assetto Corsa Category"
+			name = "ac-category".toKey()
+			description = "The Assetto Corsa Category".toKey()
 			requireChannelType(ChannelType.GuildCategory)
 		}
 		val accCategory by channel {
-			name = "acc-category"
-			description = "The Assetto Corsa Competizione Category"
+			name = "acc-category".toKey()
+			description = "The Assetto Corsa Competizione Category".toKey()
 			requireChannelType(ChannelType.GuildCategory)
 		}
 		val ams2Category by channel {
-			name = "ams2-category"
-			description = "The Automobilista 2 Category"
+			name = "ams2-category".toKey()
+			description = "The Automobilista 2 Category".toKey()
 			requireChannelType(ChannelType.GuildCategory)
 		}
 		val enduroCategory by channel {
-			name = "enduro-category"
-			description = "The Enduro Category"
+			name = "enduro-category".toKey()
+			description = "The Enduro Category".toKey()
 			requireChannelType(ChannelType.GuildCategory)
 		}
 		val consoleCategory by channel {
-			name = "console-category"
-			description = "The Console Category"
+			name = "console-category".toKey()
+			description = "The Console Category".toKey()
 			requireChannelType(ChannelType.GuildCategory)
 		}
 		val otherCategory by channel {
-			name = "other-category"
-			description = "The Other Category"
+			name = "other-category".toKey()
+			description = "The Other Category".toKey()
 			requireChannelType(ChannelType.GuildCategory)
 		}
 	}
 
 	inner class NameModal : ModalForm() {
-		override var title: String = "Event name configuration"
+		override var title: Key = "Event name configuration".toKey()
 
 		/** The prefix for the channels for the event. */
 		val channelPrefix = lineText {
-			label = "Event name prefix"
-			placeholder = "The shortened name to use for the channels. E.G.: ams"
+			label = "Event name prefix".toKey()
+			placeholder = "The shortened name to use for the channels. E.G.: ams".toKey()
 			required = true
 		}
 	}

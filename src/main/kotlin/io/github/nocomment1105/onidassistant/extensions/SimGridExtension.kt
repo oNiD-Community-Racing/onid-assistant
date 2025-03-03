@@ -1,22 +1,23 @@
 package io.github.nocomment1105.onidassistant.extensions
 
-import com.kotlindiscord.kord.extensions.commands.Arguments
-import com.kotlindiscord.kord.extensions.commands.converters.impl.int
-import com.kotlindiscord.kord.extensions.extensions.Extension
-import com.kotlindiscord.kord.extensions.extensions.publicSlashCommand
-import com.kotlindiscord.kord.extensions.pagination.PublicResponsePaginator
-import com.kotlindiscord.kord.extensions.pagination.pages.Page
-import com.kotlindiscord.kord.extensions.pagination.pages.Pages
-import com.kotlindiscord.kord.extensions.time.TimestampType
-import com.kotlindiscord.kord.extensions.time.toDiscord
-import com.kotlindiscord.kord.extensions.utils.scheduling.Scheduler
-import com.kotlindiscord.kord.extensions.utils.scheduling.Task
 import dev.kord.common.entity.GuildScheduledEventEntityMetadata
 import dev.kord.common.entity.GuildScheduledEventPrivacyLevel
 import dev.kord.common.entity.ScheduledEntityType
 import dev.kord.common.entity.optional.optional
 import dev.kord.core.behavior.createScheduledEvent
 import dev.kord.rest.builder.message.embed
+import dev.kordex.core.commands.Arguments
+import dev.kordex.core.commands.converters.impl.int
+import dev.kordex.core.extensions.Extension
+import dev.kordex.core.extensions.publicSlashCommand
+import dev.kordex.core.i18n.toKey
+import dev.kordex.core.pagination.PublicResponsePaginator
+import dev.kordex.core.pagination.pages.Page
+import dev.kordex.core.pagination.pages.Pages
+import dev.kordex.core.time.TimestampType
+import dev.kordex.core.time.toDiscord
+import dev.kordex.core.utils.scheduling.Scheduler
+import dev.kordex.core.utils.scheduling.Task
 import io.github.nocomment1105.onidassistant.api.SimGrid
 import io.github.nocomment1105.onidassistant.utils.GUILD_ID
 import kotlinx.coroutines.delay
@@ -36,8 +37,8 @@ class SimGridExtension : Extension() {
 		task = scheduler.schedule(12.hours.inWholeSeconds, repeat = true, callback = ::checkAndCreateEvents)
 
 		publicSlashCommand {
-			name = "view-all-events"
-			description = "View all the events oNiD has on SimGrid"
+			name = "view-all-events".toKey()
+			description = "View all the events oNiD has on SimGrid".toKey()
 
 			action {
 				val pagesObj = Pages()
@@ -81,8 +82,8 @@ class SimGridExtension : Extension() {
 		}
 
 		publicSlashCommand(::DetailsArgs) {
-			name = "view-event-details"
-			description = "View more in-depth details about an oNiD event"
+			name = "view-event-details".toKey()
+			description = "View more in-depth details about an oNiD event".toKey()
 
 			action {
 				val now = Clock.System.now()
@@ -150,8 +151,8 @@ class SimGridExtension : Extension() {
 		}
 
 		publicSlashCommand {
-			name = "simgrid-stats"
-			description = "View your simgrid stats!"
+			name = "simgrid-stats".toKey()
+			description = "View your simgrid stats!".toKey()
 
 			action {
 				val user = SimGrid().getUser(event.interaction.user.id)
@@ -238,8 +239,8 @@ class SimGridExtension : Extension() {
 
 	inner class DetailsArgs : Arguments() {
 		val eventId by int {
-			name = "event-id"
-			description = "The ID for the event you are looking up"
+			name = "event-id".toKey()
+			description = "The ID for the event you are looking up".toKey()
 		}
 	}
 }

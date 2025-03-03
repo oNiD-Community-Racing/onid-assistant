@@ -1,9 +1,11 @@
-rootProject.name = "onidassistant"
+pluginManagement {
+	repositories {
+		gradlePluginPortal()
+		mavenCentral()
 
-dependencyResolutionManagement {
-    versionCatalogs {
-        create("libs") {
-            from(files("libs.versions.toml"))
-        }
-    }
+		maven("https://snapshots-repo.kordex.dev")
+		maven("https://releases-repo.kordex.dev")
+	}
 }
+
+rootProject.name = "onidassistant"

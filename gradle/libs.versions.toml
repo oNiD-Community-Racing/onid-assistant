@@ -1,0 +1,42 @@
+[versions]
+kotlin = "2.1.0"
+shadow = "8.1.1"
+detekt = "1.23.7"
+git-hooks = "0.0.2"
+
+kord-extensions = "2.3.1-20250121.124117-28"
+kordex-plugin = "1.6.2"
+logging = "7.0.3"
+logback = "1.5.16"
+logback-groovy = "1.14.5"
+kmongo = "5.2.0"
+groovy = "3.0.22"
+jansi = "2.4.1"
+
+# Keep this the same as KordEx
+ktor = "3.0.3"
+
+[libraries]
+kord-extensions-core = { module = "dev.kordex:kord-extensions", version.ref = "kord-extensions" }
+kord-extensions-phishing = { module = "dev.kordex.modules:func-phishing", version.ref = "kord-extensions" }
+kord-extensions-pluralkit = { module = "dev.kordex.modules:pluralkit", version.ref = "kord-extensions"}
+kord-extensions-unsafe = { module = "dev.kordex.modules:dev-unsafe", version.ref = "kord-extensions"}
+kord-extensions-welcome = { module = "dev.kordex.modules:func-welcome", version.ref = "kord-extensions"}
+
+groovy = { module = "org.codehaus.groovy:groovy", version.ref = "groovy" }
+jansi = { module = "org.fusesource.jansi:jansi", version.ref = "jansi" }
+kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib" }
+logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
+logback-groovy = { module = "io.github.virtualdogbert:logback-groovy-config", version.ref = "logback-groovy" }
+logging = { module = "io.github.oshai:kotlin-logging", version.ref = "logging" }
+kmongo = { module = "org.litote.kmongo:kmongo-coroutine-serialization", version.ref = "kmongo" }
+detekt = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt"}
+ktor-auth = { module = "io.ktor:ktor-client-auth", version.ref = "ktor" }
+
+[plugins]
+kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+git-hooks = { id = "com.github.jakemarsden.git-hooks", version.ref = "git-hooks" }
+kord-extensions-plugin = { id = "dev.kordex.gradle.kordex", version.ref = "kordex-plugin"}

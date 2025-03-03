@@ -1,8 +1,8 @@
 package io.github.nocomment1105.onidassistant.utils
 
-import com.kotlindiscord.kord.extensions.utils.env
-import com.kotlindiscord.kord.extensions.utils.envOrNull
 import dev.kord.common.entity.Snowflake
+import dev.kordex.core.utils.env
+import dev.kordex.core.utils.envOrNull
 
 val TOKEN = env("TOKEN")
 

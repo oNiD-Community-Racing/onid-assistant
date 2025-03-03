@@ -1,15 +1,16 @@
 package io.github.nocomment1105.onidassistant.extensions
 
-import com.kotlindiscord.kord.extensions.extensions.Extension
-import com.kotlindiscord.kord.extensions.extensions.publicSlashCommand
+import dev.kordex.core.extensions.Extension
+import dev.kordex.core.extensions.publicSlashCommand
+import dev.kordex.core.i18n.toKey
 
 class PasswordCommands : Extension() {
 	override val name: String = "password-commands"
 
 	override suspend fun setup() {
 		publicSlashCommand {
-			name = "password"
-			description = "For the moment when *someone* asks about the password"
+			name = "password".toKey()
+			description = "For the moment when *someone* asks about the password".toKey()
 
 			action {
 				respond {

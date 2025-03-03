@@ -1,3 +1,4 @@
+import dev.kordex.gradle.plugins.kordex.DataCollection
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -10,15 +11,32 @@ plugins {
     alias(libs.plugins.shadow)
     alias(libs.plugins.detekt)
     alias(libs.plugins.git.hooks)
+	alias(libs.plugins.kord.extensions.plugin)
 }
 
 group = "io.github.nocomment1105.onidassistant"
 version = "0.2.1"
 
+val className = "io.github.nocomment1105.onidassistant.OnidAssistantKt"
 val javaVersion = 21
 
 repositories {
     mavenCentral()
+
+	maven {
+		name = "Kord Snapshots"
+		url = uri("https://repo.kord.dev/snapshots")
+	}
+
+	maven {
+		name = "Kord Extensions (Releases)"
+		url = uri("https://releases-repo.kordex.dev")
+	}
+
+	maven {
+		name = "Kord Extensions (Snapshots)"
+		url = uri("https://snapshots-repo.kordex.dev")
+	}
 
     maven {
         name = "Sonatype Snapshots (Legacy)"
@@ -41,8 +59,11 @@ dependencies {
     implementation(libs.kotlin.stdlib)
 
     // Logging Deps
-    implementation(libs.logging)
-    implementation(libs.logback)
+	implementation(libs.groovy)
+	implementation(libs.jansi)
+	implementation(libs.logback)
+	implementation(libs.logback.groovy)
+	implementation(libs.logging)
 
 	// Database
 	implementation(libs.kmongo)
@@ -50,8 +71,19 @@ dependencies {
 	implementation(libs.ktor.auth)
 }
 
+kordEx {
+	addDependencies = false
+	addRepositories = false
+	kordExVersion = libs.versions.kord.extensions
+
+	bot {
+		dataCollection(DataCollection.None)
+	}
+}
+
+
 application {
-    mainClass.set("io.github.nocomment1105.onidassistant.OnidAssistantKt")
+    mainClass.set(className)
 }
 
 gitHooks {
@@ -70,19 +102,20 @@ tasks {
         }
     }
 
+	java {  // Should match the Kotlin compiler options ideally
+		sourceCompatibility = JavaVersion.toVersion(javaVersion)
+		targetCompatibility = JavaVersion.toVersion(javaVersion)
+	}
+
     jar {
         manifest {
-            attributes("Main-Class" to "io.github.nocomment1105.onidassistant.OnidAssistant")
+            attributes("Main-Class" to className)
         }
     }
 
     wrapper {
         distributionType = Wrapper.DistributionType.BIN
     }
-}
-
-kotlin {
-    jvmToolchain(javaVersion)
 }
 
 detekt {
